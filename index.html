@@ -137,6 +137,7 @@
         opacity: 0;
         transform: translateY(12px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -169,7 +170,7 @@
 
     <div class="heart">♡</div>
 
-    <!-- PANTALLA PRINCIPAL -->
+    <!-- PANTALLA ANTES DEL 4 DE OCTUBRE -->
     <div id="beforeOctober">
 
       <h1>Para vos, Flor</h1>
@@ -236,8 +237,11 @@
         </div>
 
         <div class="time-box">
+
           <span class="number" id="waitSeconds">00</span>
+
           <span class="label">Segundos</span>
+
         </div>
 
       </div>
@@ -265,7 +269,7 @@
     </div>
 
 
-    <!-- MENSAJE DESPUÉS DE TOCAR EL BOTÓN -->
+    <!-- MENSAJE DESPUÉS DE CANJEAR -->
     <div id="coupon" class="hidden">
 
       <div class="final-message">
@@ -290,18 +294,23 @@
   <script>
 
     /*
-      FECHA DE DESBLOQUEO:
-      4 de octubre de 2026 a las 22:00
+      ❤️ CONFIGURACIÓN DEFINITIVA
+
+      El cupón se desbloquea:
+      4 de octubre de 2026
+      22:00
       Hora de Argentina (UTC-3)
     */
 
-    const unlockDate = new Date("2026-10-04T22:00:00-03:00");
+    const unlockDate =
+      new Date("2026-10-04T22:00:00-03:00");
 
     /*
-      FECHA DEL 4 DE OCTUBRE A LAS 00:00
+      El 4 de octubre comienza a las 00:00.
     */
 
-    const octoberDate = new Date("2026-10-04T00:00:00-03:00");
+    const octoberDate =
+      new Date("2026-10-04T00:00:00-03:00");
 
 
     function updateCountdown() {
@@ -317,19 +326,25 @@
 
         const difference = octoberDate - now;
 
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const days =
+          Math.floor(
+            difference / (1000 * 60 * 60 * 24)
+          );
 
-        const hours = Math.floor(
-          (difference / (1000 * 60 * 60)) % 24
-        );
+        const hours =
+          Math.floor(
+            (difference / (1000 * 60 * 60)) % 24
+          );
 
-        const minutes = Math.floor(
-          (difference / (1000 * 60)) % 60
-        );
+        const minutes =
+          Math.floor(
+            (difference / (1000 * 60)) % 60
+          );
 
-        const seconds = Math.floor(
-          (difference / 1000) % 60
-        );
+        const seconds =
+          Math.floor(
+            (difference / 1000) % 60
+          );
 
 
         document.getElementById("days").textContent =
@@ -369,17 +384,20 @@
 
         const difference = unlockDate - now;
 
-        const hours = Math.floor(
-          difference / (1000 * 60 * 60)
-        );
+        const hours =
+          Math.floor(
+            difference / (1000 * 60 * 60)
+          );
 
-        const minutes = Math.floor(
-          (difference / (1000 * 60)) % 60
-        );
+        const minutes =
+          Math.floor(
+            (difference / (1000 * 60)) % 60
+          );
 
-        const seconds = Math.floor(
-          (difference / 1000) % 60
-        );
+        const seconds =
+          Math.floor(
+            (difference / 1000) % 60
+          );
 
 
         document.getElementById("waitHours").textContent =
@@ -425,7 +443,7 @@
 
 
     /*
-      CUANDO TOCA "CANJEAR MI CUPÓN"
+      BOTÓN "CANJEAR MI CUPÓN"
     */
 
     function showCoupon() {
