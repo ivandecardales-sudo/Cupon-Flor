@@ -295,13 +295,8 @@
       Hora de Argentina (UTC-3)
     */
 
-    const unlockDate = new Date("2026-10-04T22:00:00-03:00");
-
-    /*
-      FECHA DEL 4 DE OCTUBRE A LAS 00:00
-    */
-
-    const octoberDate = new Date("2026-10-04T00:00:00-03:00");
+const unlockDate = new Date(Date.now() + 60 * 1000);
+const octoberDate = new Date(Date.now() - 60 * 1000);
 
 
     function updateCountdown() {
