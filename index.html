@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Para Florencia ♡</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(170, 80, 90, 0.08), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(170, 80, 90, 0.07), transparent 30%),
+        #f8f3ed;
+      color: #3d2929;
+      font-family: Georgia, "Times New Roman", serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow-x: hidden;
+    }
+
+    .petal {
+      position: fixed;
+      top: -30px;
+      font-size: 18px;
+      opacity: 0;
+      animation: caer linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes caer {
+      0% {
+        transform: translateY(-30px) rotate(0deg);
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 0.45;
+      }
+
+      90% {
+        opacity: 0.25;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      z-index: 2;
+      animation: aparecer 1.2s ease;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .top {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .small-title {
+      color: #8d4b52;
+      font-size: 15px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .heart {
+      color: #8d4b52;
+      font-size: 25px;
+    }
+
+    .card {
+      background: rgba(255, 252, 248, 0.94);
+      border: 1px solid rgba(141, 75, 82, 0.25);
+      border-radius: 24px;
+      padding: 38px 25px;
+      text-align: center;
+      box-shadow:
+        0 20px 60px rgba(70, 40, 40, 0.10),
+        0 2px 10px rgba(70, 40, 40, 0.05);
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(141, 75, 82, 0.10);
+      border-radius: 18px;
+      pointer-events: none;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: normal;
+      color: #522f33;
+      margin-bottom: 18px;
+    }
+
+    .intro {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #675454;
+      margin-bottom: 25px;
+    }
+
+    .divider {
+      width: 70px;
+      height: 1px;
+      background: #b88787;
+      margin: 0 auto 27px;
+    }
+
+    .message {
+      font-size: 19px;
+      line-height: 1.6;
+      color: #4b3636;
+      margin-bottom: 28px;
+    }
+
+    .countdown-title {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #967477;
+      margin-bottom: 12px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+      margin-bottom: 25px;
+    }
+
+    .time-box {
+      background: #f5ebe6;
+      border: 1px solid rgba(141, 75, 82, 0.15);
+      border-radius: 13px;
+      padding: 13px 5px;
+    }
+
+    .number {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 25px;
+      font-weight: bold;
+      color: #733f45;
+    }
+
+    .label {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #9b7b7b;
+      margin-top: 4px;
+    }
+
+    .date {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #8a6b6b;
+      margin-top: 8px;
+    }
+
+    .secret {
+      display: none;
+    }
+
+    .secret.show {
+      display: block;
+      animation: aparecer 1.5s ease;
+    }
+
+    .secret-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .secret h2 {
+      font-size: 32px;
+      font-weight: normal;
+      color: #522f33;
+      margin-bottom: 15px;
+    }
+
+    .secret p {
+      font-family: Arial, sans-serif;
+      color: #675454;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
+
+    .button {
+      display: inline-block;
+      border: none;
+      background: #733f45;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 30px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(115, 63, 69, 0.20);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(115, 63, 69, 0.28);
+    }
+
+    .hidden-message {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      background: #f8eee9;
+      border-radius: 15px;
+      border: 1px solid rgba(141, 75, 82, 0.15);
+      font-family: Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #523939;
+    }
+
+    .hidden-message.show {
+      display: block;
+      animation: aparecer 1s ease;
+    }
+
+    .footer {
+      margin-top: 20px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      color: #aa9090;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 400px) {
+      .card {
+        padding: 32px 18px;
+      }
+
+      h1 {
+        font-size: 31px;
+      }
+
+      .message {
+        font-size: 17px;
+      }
+
+      .number {
+        font-size: 21px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Pétalos decorativos -->
+  <div class="petal" style="left:8%; animation-duration:12s; animation-delay:1s;">♡</div>
+  <div class="petal" style="left:22%; animation-duration:15s; animation-delay:5s;">✦</div>
+  <div class="petal" style="left:40%; animation-duration:13s; animation-delay:2s;">♡</div>
+  <div class="petal" style="left:61%; animation-duration:17s; animation-delay:7s;">✦</div>
+  <div class="petal" style="left:78%; animation-duration:14s; animation-delay:4s;">♡</div>
+  <div class="petal" style="left:92%; animation-duration:16s; animation-delay:9s;">✦</div>
+
+  <main class="container">
+
+    <div class="top">
+      <div class="small-title">Para Florencia</div>
+      <div class="heart">♡</div>
+    </div>
+
+    <section class="card">
+
+      <!-- CUPÓN ANTES DEL 4 DE OCTUBRE -->
+      <div id="countdownSection">
+
+        <h1>Tenés un cupón especial</h1>
+
+        <div class="divider"></div>
+
+        <p class="message">
+          Hay una sorpresa esperándote...
+          <br>
+          pero vas a tener que esperar un poquito. ❤️
+        </p>
+
+        <div class="countdown-title">
+          Tu sorpresa estará disponible en
+        </div>
+
+        <div class="countdown">
+
+          <div class="time-box">
+            <span class="number" id="days">00</span>
+            <span class="label">Días</span>
+          </div>
+
+          <div class="time-box">
+            <span class="number" id="hours">00</span>
+            <span class="label">Horas</span>
+          </div>
+
+          <div class="time-box">
+            <span class="number" id="minutes">00</span>
+            <span class="label">Minutos</span>
+          </div>
+
+        </div>
+
+        <div class="date">
+          📅 4 de octubre de 2026
+        </div>
+
+        <p class="intro" style="margin-top:22px; margin-bottom:0;">
+          Guardá este cupón.<br>
+          <i>Y no intentes hacer trampa... 😏</i>
+        </p>
+
+      </div>
+
+
+      <!-- LO QUE APARECE EL 4 DE OCTUBRE -->
+
+      <div id="secretSection" class="secret">
+
+        <div class="secret-icon">🎁</div>
+
+        <h2>¡Llegó el día! ❤️</h2>
+
+        <div class="divider"></div>
+
+        <p>
+          Esperaste todo este tiempo...
+          <br><br>
+          y finalmente tu cupón está listo para ser canjeado.
+        </p>
+
+        <button class="button" onclick="revealSurprise()">
+          DESCUBRIR MI SORPRESA
+        </button>
+
+        <div id="hiddenMessage" class="hidden-message">
+          💕 <br><br>
+          Acá vamos a poner tu sorpresa especial.
+          <br><br>
+          <i>Te amo, Flor.</i>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="footer">
+      Hecho con amor ♡
+    </div>
+
+  </main>
+
+
+  <script>
+
+    /*
+      FECHA DE LA SORPRESA
+
+      4 de octubre de 2026 a las 00:00
+      usando la hora local del dispositivo.
+    */
+
+    const targetDate = new Date(2026, 9, 4, 0, 0, 0);
+
+
+    function updateCountdown() {
+
+      const now = new Date();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+
+        document.getElementById("countdownSection").style.display = "none";
+        document.getElementById("secretSection").classList.add("show");
+
+        return;
+      }
+
+      const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+      );
+
+      const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+      );
+
+      document.getElementById("days").textContent =
+        String(days).padStart(2, "0");
+
+      document.getElementById("hours").textContent =
+        String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").textContent =
+        String(minutes).padStart(2, "0");
+    }
+
+
+    function revealSurprise() {
+
+      const message = document.getElementById("hiddenMessage");
+
+      message.classList.add("show");
+
+    }
+
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+  </script>
+
+</body>
+</html>
