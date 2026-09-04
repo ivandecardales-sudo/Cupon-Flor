@@ -137,7 +137,6 @@
         opacity: 0;
         transform: translateY(12px);
       }
-
       to {
         opacity: 1;
         transform: translateY(0);
@@ -213,7 +212,7 @@
     </div>
 
 
-    <!-- PANTALLA DE ESPERA -->
+    <!-- PANTALLA DEL 4 DE OCTUBRE ANTES DE LAS 22:00 -->
     <div id="octoberWaiting" class="hidden">
 
       <h1>✨ Hoy es el día...</h1>
@@ -266,7 +265,7 @@
     </div>
 
 
-    <!-- MENSAJE DEL CUPÓN -->
+    <!-- MENSAJE DESPUÉS DE TOCAR EL BOTÓN -->
     <div id="coupon" class="hidden">
 
       <div class="final-message">
@@ -291,18 +290,18 @@
   <script>
 
     /*
-      🧪 MODO PRUEBA
-
-      La página considera que el "4 de octubre"
-      ya comenzó y desbloquea el cupón en 60 segundos.
-
-      Después de la prueba volveremos a poner:
-      4 de octubre de 2026 a las 22:00.
+      FECHA DE DESBLOQUEO:
+      4 de octubre de 2026 a las 22:00
+      Hora de Argentina (UTC-3)
     */
 
-    const unlockDate = new Date(Date.now() + 60 * 1000);
+    const unlockDate = new Date("2026-10-04T22:00:00-03:00");
 
-    const octoberDate = new Date(Date.now() - 60 * 1000);
+    /*
+      FECHA DEL 4 DE OCTUBRE A LAS 00:00
+    */
+
+    const octoberDate = new Date("2026-10-04T00:00:00-03:00");
 
 
     function updateCountdown() {
@@ -311,7 +310,59 @@
 
 
       /*
-        PANTALLA DE ESPERA
+        ANTES DEL 4 DE OCTUBRE
+      */
+
+      if (now < octoberDate) {
+
+        const difference = octoberDate - now;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+        const hours = Math.floor(
+          (difference / (1000 * 60 * 60)) % 24
+        );
+
+        const minutes = Math.floor(
+          (difference / (1000 * 60)) % 60
+        );
+
+        const seconds = Math.floor(
+          (difference / 1000) % 60
+        );
+
+
+        document.getElementById("days").textContent =
+          String(days).padStart(2, "0");
+
+        document.getElementById("hours").textContent =
+          String(hours).padStart(2, "0");
+
+        document.getElementById("minutes").textContent =
+          String(minutes).padStart(2, "0");
+
+        document.getElementById("seconds").textContent =
+          String(seconds).padStart(2, "0");
+
+
+        document.getElementById("beforeOctober")
+          .classList.remove("hidden");
+
+        document.getElementById("octoberWaiting")
+          .classList.add("hidden");
+
+        document.getElementById("unlocked")
+          .classList.add("hidden");
+
+        document.getElementById("coupon")
+          .classList.add("hidden");
+
+        return;
+      }
+
+
+      /*
+        4 DE OCTUBRE ENTRE 00:00 Y 21:59:59
       */
 
       if (now >= octoberDate && now < unlockDate) {
@@ -358,28 +409,23 @@
 
 
       /*
-        CUPÓN DESBLOQUEADO
+        DESDE LAS 22:00 DEL 4 DE OCTUBRE
       */
 
-      if (now >= unlockDate) {
+      document.getElementById("beforeOctober")
+        .classList.add("hidden");
 
-        document.getElementById("beforeOctober")
-          .classList.add("hidden");
+      document.getElementById("octoberWaiting")
+        .classList.add("hidden");
 
-        document.getElementById("octoberWaiting")
-          .classList.add("hidden");
-
-        document.getElementById("unlocked")
-          .classList.remove("hidden");
-
-        return;
-      }
+      document.getElementById("unlocked")
+        .classList.remove("hidden");
 
     }
 
 
     /*
-      BOTÓN "CANJEAR MI CUPÓN"
+      CUANDO TOCA "CANJEAR MI CUPÓN"
     */
 
     function showCoupon() {
@@ -392,6 +438,10 @@
 
     }
 
+
+    /*
+      ACTUALIZAR CADA SEGUNDO
+    */
 
     updateCountdown();
 
